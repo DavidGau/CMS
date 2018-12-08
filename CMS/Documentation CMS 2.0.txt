@@ -1,0 +1,107 @@
+==========================================================================================================
+ _____              ___       _____            _____ 
+|	|\    /|   |__            /           |     | 
+|	| \  / |      |          /       ___  |     | 
+|_____  |  \/  |   ___|         /____   |___| |_____|           
+								   	
+Création de la doc: 2018-03-25
+Création du CMS: 2018-03-XX
+==========================================================================================================
+CMS 2.0 BDD
+
+Description: Ce CMS permet d'éditer le texte de tout site web qui en est équipé. L'éditeur de texte utilisé est TinyMCE.
+Il fonctionne de la façon suivante:
+
+ -Une base de donnée est crée
+	-Cette base contient 3 tables
+		-Table actuel (contient le texte montré aux visiteurs du site)
+		-Table temporaire (contient le texte sur lequel le client fait les modifications)
+		-Table backup (est utilisé si jamais le client fait une action non-désirée)
+
+	Les 3 tables fonctionnent sous un cycle. 
+		-Lorsque les modifications sont enregistrés, le contenu de la table backup est remplacé par celui
+		 de la table_actuel puis le contenu de la table_actuel est remplacé par celui de la table_temporaire.
+		-Lorsqu'un backup est demandé, le contenu de la table_temporaire est remplacé par celui de la backup
+		 il ne reste donc plus qu'à utilisé le cycle 1 pour enregistrer le backup (le mettre sur la table_actuel).
+
+
+Voici les étapes pour implémenter le CMS sur un site web.
+
+1. Insérez le dossier CMS à l'intérieur du site web.Ce dossier doit contenir les dossiers/pages suivantes:
+
+	-Dossier Php
+		-connexion_admin.php
+			-id_site.php
+			-verif_connexion.php
+
+		
+		-charge_backup.php
+		-charge_texte.php
+		-refresh_temporaire.php
+		-sauvegarde_temporaire.php
+		-confirme_enregistre.php
+		-connexion_bdd.php
+
+	-Dossier Images
+		-Les images du CMS
+	-Dossier Css
+		-Les fichier .css du CMS
+
+	Des fichier directement dans le répertoire du CMS:
+	-config_tinymce.js
+	-tinymce_4.7.9
+	La page_modification.php doit être inclus dans le même répertoire que les pages du site web
+
+2. S'assurer quela page_connexion.php ait la bonne BDD
+3. Crée un utilisateur sur la BDD. [Id,Nom,Mot_de_passe]
+4. Modifier le fichier id_site.php pour qu'il contienne l'Id de l'index de la base de donnée
+5. Modifier le fichier config_tinymce.js pour qu'il convienne au site
+6. Crée les zones éditables dans le code en donnant le nom de classe: "zone" + numero de la zone
+7. Crée ces zones éditables dans la base de donnée sur les 3 tables -> ((fichier cree_zone.html et cree_zone.php))
+8.Insérez le fichier charge_texte.php sur chaque page
+9. Insérez le chargement du texte sur chaque page ex: <p class="zone4"><?php load_texte(4,"index",1) ?></p>
+
+
+
+
+=================================== Pages administrateur ==========================================
+Il existe certains script afin de facilité la mise en fonction du CMS. En voici la liste:
+
+	-creation_compte.php			------Crée un compte pour un utilisateur
+		-insert_compte_bdd.php
+
+	-cree_zone_edition.html
+		-insert_zone_edition.php ------Sert à crée dans les 3 tables des champs d'éditions pour l'utilisateur, cela évite d'avoir à les crée à la main.
+
+
+
+======================== Base de données ==============================
+La base de donnée est composée de 4 tables.
+
+ Admin:
+	Contient les champs: [Id,Nom,Mot_de_passe]
+	Utilitée: Informations de connexion pour les utilisateurs du CMS
+
+ Table_actuel:
+	Contient les champs: [Id,Id_admin,Page,Numero_zone,Texte]
+	Utilitée: Contient le texte présentement affiché sur le site web
+ Table_temporaire:
+	Contient les champs: [Id,Id_admin,Page,Numero_zone,Texte]
+	Utilitée: Contient le texte pendant qu'un admin fait des modifications
+ Table_backup:
+	Contient les champs: [Id,Id_admin,Page,Numero_zone,Texte]
+	Utilitée: Contient l'avant dernière version de la table_actuel
+
+
+	Les 3 tables (actuel,temporaire et backup) fonctionnent sous un cycle. 
+		-Lorsque les modifications sont enregistrés, le contenu de la table backup est remplacé par celui
+		 de la table_actuel puis le contenu de la table_actuel est remplacé par celui de la table_temporaire.
+		-Lorsqu'un backup est demandé, le contenu de la table_temporaire est remplacé par celui de la backup
+		 il ne reste donc plus qu'à utilisé le cycle 1 pour enregistrer le backup (le mettre sur la table_actuel).
+
+
+====================================================================================================
+
+-David Gaulin 2018-03-25
+
+=====================================================================================================

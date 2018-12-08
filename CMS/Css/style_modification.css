@@ -1,0 +1,88 @@
+body{
+	width:99%;
+	margin:auto;
+}
+
+#barre_bouton{
+	background-color: yellow;
+	text-align: center;
+	background-color: #373738;
+}
+
+#barre_bouton button:nth-child(1){
+	border:3px solid #448bff;
+}
+
+#barre_bouton button:nth-child(2){
+	border:3px solid #fcf844;
+}
+
+#barre_bouton button:nth-child(3){
+	border:3px solid #fc444a;
+}
+
+#barre_bouton button:nth-child(1):hover{
+	border:3px solid #2f72e0;
+	background-color: #448bff;
+	color:#FEFEFE;
+}
+
+#barre_bouton button:nth-child(2):hover{
+	border:3px solid #d8d424;
+	background-color: #b2ac37;
+	color:#FEFEFE;
+}
+
+#barre_bouton button:nth-child(3):hover{
+	border:3px solid #cc282e;
+	background-color: #fc444a;
+	color:#FEFEFE;
+}
+
+#barre_bouton button{
+	margin-right:3%;
+	margin-left:3%;
+	padding:10px 15px 10px 15px;
+	outline:0;
+	font-size:25px;
+	background-color: transparent;
+	border-radius:11px;
+	font-style: italic;
+	color:#FEFEFE;
+	margin-top: 50px;
+	margin-bottom:50px;
+	transition-duration: 1s;
+	cursor: pointer;
+	
+}
+
+#barre_bouton a{
+	color:white;
+	font-size: 30px;
+	display: block;
+}
+
+@keyframes sauvegarde {
+
+	0%{	
+		transform: rotate(0deg);
+	}
+
+	25%{
+		transform: rotate(5deg);
+	}
+
+	50%{
+		transform: rotate(0deg);
+	}
+
+	75%{
+		transform: rotate(-5deg);
+	}
+
+	100%{
+		transform: rotate(0deg);
+	}
+
+
+}

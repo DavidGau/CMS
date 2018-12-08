@@ -1,0 +1,89 @@
+body{
+	margin:0;
+	width:100%;
+	overflow-x: hidden;
+	background-image: url("../images/background_connexion.png");
+	background-size: cover;
+	font-family: "Courgette";
+}
+
+div{
+	display: flex;
+  	flex-direction: column;
+  	justify-content: center;
+  	height:100vh;
+}
+
+form{
+	display: inline-block;
+	width:40%;
+	margin:auto;
+	text-align: center;
+	background-color:white;
+	border-radius:40px;
+	opacity:0.97;
+	padding-right:15px;
+	padding-left:15px;
+}
+
+label,input{
+	display: block;
+	font-size:40px;
+	margin:auto;
+	margin-top:30px;
+	width:80%;
+}
+
+input{
+	border:0;
+	outline:0;
+	border-bottom:2px solid black;
+}
+
+input:hover{
+	transition-duration:1s;
+	border-color:#5599FF;
+}
+
+input[type=submit]{
+	width:50%;
+	font-family: "Courgette";
+	border:0;
+}
+
+p{
+	color:#f44242;
+	height:45px;
+	font-size:30px;
+}
+
+@media screen and (max-width:1200px)
+{
+	label,input{
+		font-size:35px;
+	}
+}
+
+@media screen and (max-width:1000px)
+{
+	form{
+		width:100%;
+		max-width:450px;
+	}
+
+	label,input{
+		font-size:30px;
+	}
+
+	p{
+		font-size:25px;
+	}
+}
+
+@media screen and (max-height: 400px)
+{
+	form{
+		margin-top:300px;
+	}
+}
+
